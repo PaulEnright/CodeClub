@@ -49,8 +49,6 @@ main()
   }
   putchar('\n');
   
-//??? NEED TO HANDLE TABS PROPERLY.
-
   // Output the text, word-wrapping at the maximum column size.
   lineStartIdx = 0;
   while (lineEndIdx < inputLength - 1)
