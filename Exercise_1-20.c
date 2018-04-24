@@ -2,7 +2,7 @@
 
 /* Replace tabs with strings of spaces. */
 
-#define TAB_SIZE  (4)
+#define TAB_SIZE  (8)
 #define MAX_INPUT_LENGTH (500)
 
 main()
