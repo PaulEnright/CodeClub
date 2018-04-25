@@ -84,33 +84,6 @@ main()
       // else Line with no whitespace. Output the characters (nothing to do - variables are already correct to do this).
     }
     
-#if 0
-    if (lineStartIdx + MAX_OUTPUT_COLUMNS - 1 < inputLength)
-    {
-      lineEndIdx = lineStartIdx + MAX_OUTPUT_COLUMNS - 1;
-      // Find the last space/tab in this "column"
-      for (i = lineEndIdx ; i > lineStartIdx ; i--)
-      {
-        if (inputLine[i] == ' ' || inputLine[i] == '\t')
-        {
-          // Found!
-          lineEndIdx = i;
-          break;
-        }
-      }
-      // No spaces/tabs found. Simply output all characters.
-      if (lineEndIdx <= lineStartIdx)
-      {
-        lineEndIdx = lineStartIdx + MAX_OUTPUT_COLUMNS - 1;
-      }
-    }
-    else
-    {
-      // Last line. Output everything remaining.
-      lineEndIdx = inputLength - 1;
-    }
-#endif
-    
     // Output the line.
     for (i = lineStartIdx ; i <= lineEndIdx ; i++)
     {
