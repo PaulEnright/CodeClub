@@ -9,49 +9,39 @@ void ungetch(int);
 /* getop:  get next character or numeric operand */
 int getop(char s[])
 {
+  static int leftoverChar = EOF;
   int i, c;
   
-  while ((s[0] = c = getch()) == ' ' || c == '\t')
-    ;
+  if (leftoverChar != EOF && leftoverChar != ' ' && leftoverChar != '\t')
+  {
+    s[0] = leftoverChar;
+  }
+  else
+  {
+    while ((s[0] = c = getchar()) == ' ' || c == '\t');
+  }
+  leftoverChar = EOF;
   
   s[1] = '\0';
   if (!isdigit(c) && c != '.')
     return c; /* not a number */
   i = 0;
   if (isdigit(c)) /* collect integer part */
-    while (isdigit(s[++i] = c = getch()));
+    while (isdigit(s[++i] = c = getchar()));
   
   if (c == '.') /* collect fraction part */
-    while (isdigit(s[++i] = c = getch()));
+    while (isdigit(s[++i] = c = getchar()));
       
   s[i] = '\0';
   if (c != EOF)
-    ungetch(c);
+  {
+    leftoverChar = c;
+  }
   return NUMBER;
 }
 
 
 #define MAXLINE 1000
-
-char buf[MAXLINE];
-int bufp = 0;
-
-int getch(void) /* get a (possibly pushed back) character */
-{
-  return (bufp > 0) ? buf[--bufp] : getchar();
-}
-
-void ungetch(int c) /* push character back on input */
-{
-  if (bufp >= MAXLINE)
-  {
-    printf("ungetch: too many characters\n");
-  }
-  else
-  {
-    buf[bufp++] = c;
-  }
-}
 
 main()
 {
